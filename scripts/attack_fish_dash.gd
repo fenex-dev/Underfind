@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed := 170
+@export var speed := 200
 @export var lifetime := 10.0   # safety lifetime in seconds
 
 var player: Node2D
@@ -67,7 +67,6 @@ func stop_movement():
 	is_active = false
 	velocity = Vector2.ZERO
 	# optional hit effect: visually flip or play animation here
-	await get_tree().create_timer(1.0).timeout
 	queue_free()
 	
 func explode():

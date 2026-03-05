@@ -26,7 +26,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		player = null
 func look_at_player():
 	# Compare X positions using the sprite's global position as the siren's visual position
-	if player.global_position.x > sprite.global_position.x:
+	if player.global_position.x < sprite.global_position.x:
 		# Player is to the right
 		sprite.flip_h = false 
 	else:
