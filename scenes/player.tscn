@@ -102,7 +102,7 @@ shape = SubResource("CapsuleShape2D_g2els")
 position = Vector2(-9.999999, 20)
 scale = Vector2(0.08920786, 0.08881524)
 sprite_frames = SubResource("SpriteFrames_g2els")
-animation = &"Idle"
+animation = &"Swim"
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=827045815]
 texture_filter = 1

@@ -1,10 +1,9 @@
 extends CharacterBody2D
 
 # --- EXPORT VARIABLES ---
-@export var speed: float = 300
+@export var speed: float = 400
 var rope_length_org: float = 1050
 var rope_length_2: float = rope_length_org - 1600
-
 @export var hp: Array[AtlasTexture]
 
 # --- CONSTANTS ---
@@ -127,36 +126,35 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		sprite.play("Jump")
 
-	# --- HORIZONTAL ---
-	if direction != 0:
-		velocity.x = direction * speed
-
-		if not in_world:
-			sprite.flip_h = direction < 0
-
-		if not in_world:
-			sprite.play("Walk")
-		else:
+	# --- MOVEMENT LOGIC ---
+	if in_world:
+		var move_dir = Vector2.ZERO
+		move_dir.x = direction
+		move_dir.y = Input.get_axis("move_up", "move_down")
+		
+		if move_dir != Vector2.ZERO:
+			velocity = move_dir.normalized() * speed
+			
+			# Animation
 			if is_on_floor():
 				sprite.play("Walk_Helmet")
 			else:
 				sprite.play("Swim")
-
-	else:
-		velocity.x = lerp(velocity.x, 0.0, 0.1)
-
-		if not in_world:
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, speed * 0.2)
 			sprite.play("Idle")
-
-	# --- SWIMMING VERTICAL ---
-	if in_world:
-		if Input.is_key_pressed(Key.KEY_W):
-			velocity.y = JUMP_VELOCITY / 4
-		elif Input.is_key_pressed(Key.KEY_S):
-			velocity.y = -JUMP_VELOCITY / 4
-
+			
 		if Input.is_key_pressed(Key.KEY_R):
 			change_scenes("res://scenes/base.tscn")
+	else:
+		# BASE/LAND MOVEMENT
+		if direction != 0:
+			velocity.x = direction * speed
+			sprite.flip_h = direction < 0
+			sprite.play("Walk")
+		else:
+			velocity.x = lerp(velocity.x, 0.0, 0.1)
+			sprite.play("Idle")
 
 	# --- ROPE CONSTRAINT ---
 	if rope_active:
@@ -179,11 +177,21 @@ func _physics_process(delta: float) -> void:
 
 	# --- SWIM ROTATION (CLEAN + STABLE) ---
 	if in_world:
-		if velocity.length() > 10:
-			var target_angle = velocity.angle()
-			sprite.rotation = lerp_angle(sprite.rotation, target_angle, 0.15)
-	else:
-		sprite.rotation = 0
+		if velocity.length() > 10:  # Only turn if the fish is moving fast enough
+			var target_angle = velocity.angle()  # Figure out where the fish should face
+			if abs(target_angle) < 0.1 or abs(target_angle - PI) < 0.1:  # If moving left or right
+				target_angle = 0.0 if velocity.x > 0 else PI  # Face directly left or right
+			sprite.rotation = lerp_angle(sprite.rotation, target_angle, 0.3)  # Turn faster
+			
+			# Prevent upside down when facing left
+			var is_facing_left = abs(sprite.rotation) > PI / 2
+			sprite.flip_v = is_facing_left
+			sprite.flip_h = false # Ensure flip_h is off when underwater
+		else:
+			sprite.rotation = 0  # Stay still if not moving
+			sprite.flip_v = false
+			sprite.flip_h = direction < 0 if direction != 0 else sprite.flip_h
+		
 
 	# --- ROPE VISUAL ---
 	if rope_active and rope_line:
