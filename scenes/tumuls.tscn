@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://tgm4sn3l4tp1"]
 
-[ext_resource type="Script" path="res://scripts/tumuls.gd" id="1_4yg23"]
+[ext_resource type="Script" uid="uid://dwp677dldwgm6" path="res://scripts/tumuls.gd" id="1_4yg23"]
 [ext_resource type="Texture2D" uid="uid://brg13t05y0dxl" path="res://IMGS/tumuls.png" id="1_i18t3"]
+[ext_resource type="Script" uid="uid://k47fhetxfht4" path="res://scenes/label.gd" id="3_2223f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_phl1y"]
 size = Vector2(51.000008, 46.000008)
@@ -37,6 +38,7 @@ offset_right = -31.0
 offset_bottom = -55.0
 text = "Press E to mine"
 label_settings = SubResource("LabelSettings_rsmou")
+script = ExtResource("3_2223f")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

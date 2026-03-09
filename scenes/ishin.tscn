@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://dgf2pqwnpx1gn"]
 
-[ext_resource type="Script" path="res://scripts/ishin.gd" id="1_01tek"]
+[ext_resource type="Script" uid="uid://dq058hk36l5ul" path="res://scripts/ishin.gd" id="1_01tek"]
 [ext_resource type="Texture2D" uid="uid://cmpeursl4y7yb" path="res://IMGS/ishin.png" id="2_tfn2l"]
+[ext_resource type="Script" uid="uid://k47fhetxfht4" path="res://scenes/label.gd" id="3_tfn2l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_phl1y"]
 size = Vector2(51.000008, 46.000008)
@@ -37,6 +38,7 @@ offset_right = -31.0
 offset_bottom = -55.0
 text = "Press E to mine"
 label_settings = SubResource("LabelSettings_rsmou")
+script = ExtResource("3_tfn2l")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

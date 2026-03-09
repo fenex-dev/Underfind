@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://c2be53khsfmnk"]
 
 [ext_resource type="Texture2D" uid="uid://bpu0tjgf2fivc" path="res://IMGS/placid.png" id="1_bdnw7"]
-[ext_resource type="Script" path="res://scripts/placid.gd" id="1_phl1y"]
+[ext_resource type="Script" uid="uid://bmdjrgbc4brhv" path="res://scripts/placid.gd" id="1_phl1y"]
+[ext_resource type="Script" uid="uid://k47fhetxfht4" path="res://scenes/label.gd" id="3_ylkx0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_phl1y"]
 size = Vector2(52.500008, 34.000008)
@@ -36,6 +37,7 @@ offset_right = -31.0
 offset_bottom = -55.0
 text = "Press E to mine"
 label_settings = SubResource("LabelSettings_rsmou")
+script = ExtResource("3_ylkx0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

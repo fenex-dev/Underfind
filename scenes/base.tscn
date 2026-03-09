@@ -15,7 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://bvcud62dcxpx2" path="res://scenes/shop.tscn" id="15_ot4hf"]
 [ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="15_vciil"]
 [ext_resource type="AudioStream" uid="uid://dvfgsmhet4trt" path="res://sounds/ytmp3free.cc_beach-vibes-lofihip-hop-mix-lofi-nature-youtubemp3free.org.mp3" id="15_ycryd"]
-[ext_resource type="PackedScene" uid="uid://dvy1ymmd68kn" path="res://scenes/siren.tscn" id="16_vciil"]
 
 [sub_resource type="GDScript" id="GDScript_jn13j"]
 script/source = "extends Node2D
@@ -203,8 +202,5 @@ vertical_alignment = 1
 
 [node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=118932849]
 stream = ExtResource("15_ycryd")
-
-[node name="CharacterBody2D" parent="." unique_id=33838428 instance=ExtResource("16_vciil")]
-position = Vector2(340, 194)
 
 [connection signal="body_entered" from="Area2D" to="NiggAdam" method="on_enter_water"]

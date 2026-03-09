@@ -9,6 +9,9 @@ var rope_length_2: float = rope_length_org - 1600
 # --- CONSTANTS ---
 var GRAVITY: float = 1200.0
 const JUMP_VELOCITY: float = -600
+@onready var is_underwater: bool = !get_tree().current_scene.scene_file_path == "res://scenes/base.tscn"
+@onready var is_in_base: bool = !is_underwater
+
 
 # --- NODE REFERENCES ---
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -42,7 +45,7 @@ func _ready() -> void:
 	change_hp(Global.hp)
 	change_money(Global.money)
 
-	if get_parent().name == "World1":
+	if is_underwater:
 		GRAVITY /= 2
 		speed = Global.speed / 2
 	else:
@@ -50,7 +53,7 @@ func _ready() -> void:
 
 
 func change_speed(new_speed: float):
-	if get_parent().name == "World1":
+	if is_underwater:
 		speed = new_speed / 2
 	else:
 		speed = new_speed
@@ -104,12 +107,10 @@ func change_money(money):
 
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_axis("move_left", "move_right")
-	var in_world = get_parent().name.contains("World")
 
 	if hook:
 		hook_position = hook.global_position
 
-	var is_in_base = get_tree().current_scene.scene_file_path == "res://scenes/base.tscn"
 
 	# --- GRAVITY ---
 	if is_in_base:
@@ -127,7 +128,7 @@ func _physics_process(delta: float) -> void:
 		sprite.play("Jump")
 
 	# --- MOVEMENT LOGIC ---
-	if in_world:
+	if is_underwater:
 		var move_dir = Vector2.ZERO
 		move_dir.x = direction
 		move_dir.y = Input.get_axis("move_up", "move_down")
@@ -176,7 +177,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	# --- SWIM ROTATION (CLEAN + STABLE) ---
-	if in_world:
+	if is_underwater:
 		if velocity.length() > 10:  # Only turn if the fish is moving fast enough
 			var target_angle = velocity.angle()  # Figure out where the fish should face
 			if abs(target_angle) < 0.1 or abs(target_angle - PI) < 0.1:  # If moving left or right

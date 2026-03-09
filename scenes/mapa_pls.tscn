@@ -16,16 +16,16 @@
 [ext_resource type="AudioStream" uid="uid://0npph65pat50" path="res://sounds/ytmp3free.cc_submerged-ocean-ambient-music-underwater-sounds-youtubemp3free.org.mp3" id="8_myhk2"]
 [ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="9_txjws"]
 [ext_resource type="Script" uid="uid://bnhodst1lsw4l" path="res://scripts/adam.gd" id="10_127b4"]
-[ext_resource type="Shader" path="res://shaders/ocean.gdshader" id="11_05jtr"]
+[ext_resource type="Shader" uid="uid://e7igo45fo1by" path="res://shaders/ocean.gdshader" id="11_05jtr"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="12_wak0d"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="13_emdhy"]
 [ext_resource type="Texture2D" uid="uid://dmuqlisthyhib" path="res://IMGS/ui/All.png" id="15_xg242"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="19_ogfxj"]
-[ext_resource type="PackedScene" path="res://scenes/siren.tscn" id="21_vvx7h"]
-[ext_resource type="PackedScene" path="res://scenes/gold_chest.tscn" id="22_6xfuw"]
-[ext_resource type="PackedScene" path="res://scenes/ishin.tscn" id="23_yop7p"]
-[ext_resource type="PackedScene" path="res://scenes/placid.tscn" id="24_lvqyh"]
-[ext_resource type="PackedScene" path="res://scenes/amorem.tscn" id="25_5acj2"]
+[ext_resource type="PackedScene" uid="uid://dvy1ymmd68kn" path="res://scenes/siren.tscn" id="21_vvx7h"]
+[ext_resource type="PackedScene" uid="uid://dgf2pqwnpx1gn" path="res://scenes/ishin.tscn" id="23_yop7p"]
+[ext_resource type="PackedScene" uid="uid://c2be53khsfmnk" path="res://scenes/placid.tscn" id="24_lvqyh"]
+[ext_resource type="PackedScene" uid="uid://dvjhyhh0mqp7x" path="res://scenes/amorem.tscn" id="25_5acj2"]
+[ext_resource type="PackedScene" uid="uid://b8xviliclgldr" path="res://scenes/iron_chest.tscn" id="26_yop7p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvx7h"]
 size = Vector2(2090, 498)
@@ -2650,11 +2650,8 @@ position = Vector2(185, 1084)
 [node name="CharacterBody2D2" parent="Area2D2" unique_id=1747079483 instance=ExtResource("7_myhk2")]
 position = Vector2(523.99994, -818)
 
-[node name="CharacterBody2D3" parent="." unique_id=893069550 instance=ExtResource("7_myhk2")]
-position = Vector2(1458.9999, 523.99994)
-
 [node name="CharacterBody2D2" parent="." unique_id=1383476667 instance=ExtResource("7_myhk2")]
-position = Vector2(631.99994, 949.99994)
+position = Vector2(635.00006, 1105.9999)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2067134431]
 position = Vector2(0, 57)
@@ -2748,9 +2745,6 @@ stream = ExtResource("19_ogfxj")
 [node name="CharacterBody2D4" parent="." unique_id=33838428 instance=ExtResource("21_vvx7h")]
 position = Vector2(501, 1227)
 
-[node name="Chest2" parent="." unique_id=1329740356 instance=ExtResource("22_6xfuw")]
-position = Vector2(1569, 1311)
-
 [node name="Area2D4" parent="." unique_id=1581930551 instance=ExtResource("23_yop7p")]
 position = Vector2(277, 296)
 rotation = 1.5707964
@@ -2792,5 +2786,8 @@ offset_bottom = 503.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "Press \"R\" to go back up to surface!"
+
+[node name="Chest3" parent="." unique_id=1329740356 instance=ExtResource("26_yop7p")]
+position = Vector2(1569, 1311)
 
 [connection signal="body_entered" from="Area2D3" to="CharacterBody2D" method="go_next_level"]
