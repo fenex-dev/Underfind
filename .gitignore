@@ -1,3 +1,48 @@
-# Godot 4+ specific ignores
+# Godot-specific ignores
 .godot/
 /android/
+
+# Godot 4 editor-only export configuration
+export_presets.cfg
+
+# Imported assets
+# We keep .import files as they contain import settings, 
+# but we ignore the actual imported data which is in .godot/
+# *.import
+
+# Sensitive/Local configuration
+override.cfg
+*.env
+secret.json
+*.key
+*.p12
+*.keystore
+*.jks
+
+# Mono/C# ignores
+.mono/
+bin/
+obj/
+*.csproj
+*.sln
+
+# IDE-specific ignores
+.idea/
+.vscode/
+
+# OS-specific ignores
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Exported binaries/archives
+*.exe
+*.zip
+*.tar.gz
+*.dmg
+*.app
+*.apk
+*.html
+*.js
+*.wasm
+*.pck
