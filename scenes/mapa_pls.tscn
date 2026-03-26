@@ -10,8 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://cndvyneft6tr3" path="res://IMGS/title/sand.png" id="4_xg242"]
 [ext_resource type="Texture2D" uid="uid://nx5rf0nrds4e" path="res://IMGS/title/foreground-1.png" id="5_vvx7h"]
 [ext_resource type="Texture2D" uid="uid://b2g4x5syc17ek" path="res://IMGS/title/foreground-2.png" id="6_8p7sb"]
-[ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="6_x5sg4"]
-[ext_resource type="Script" uid="uid://dsilfi0q220ec" path="res://scripts/banner.gd" id="7_banner"]
 [ext_resource type="PackedScene" uid="uid://dvm61g86m55o7" path="res://scenes/zombie.tscn" id="7_myhk2"]
 [ext_resource type="AudioStream" uid="uid://0npph65pat50" path="res://sounds/ytmp3free.cc_submerged-ocean-ambient-music-underwater-sounds-youtubemp3free.org.mp3" id="8_myhk2"]
 [ext_resource type="PackedScene" uid="uid://c1v7a5htiqcsp" path="res://scenes/player.tscn" id="9_txjws"]
@@ -20,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="12_wak0d"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="13_emdhy"]
 [ext_resource type="Texture2D" uid="uid://dmuqlisthyhib" path="res://IMGS/ui/All.png" id="15_xg242"]
+[ext_resource type="PackedScene" uid="uid://bk6meeushd7ey" path="res://state_banner.tscn" id="17_6xfuw"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="19_ogfxj"]
 [ext_resource type="PackedScene" uid="uid://dvy1ymmd68kn" path="res://scenes/siren.tscn" id="21_vvx7h"]
 [ext_resource type="PackedScene" uid="uid://dgf2pqwnpx1gn" path="res://scenes/ishin.tscn" id="23_yop7p"]
@@ -2550,10 +2549,6 @@ region = Rect2(1059, 37, 42, 7)
 atlas = ExtResource("15_xg242")
 region = Rect2(1107, 37, 42, 7)
 
-[sub_resource type="LabelSettings" id="LabelSettings_jhl44"]
-font_size = 20
-font_color = Color(0, 0, 0, 1)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5b7n5"]
 shader = ExtResource("11_05jtr")
 shader_parameter/tint_color = Vector3(0, 0.4, 0.7)
@@ -2686,36 +2681,6 @@ limit_top = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="Banner" type="TextureRect" parent="CharacterBody2D/Camera2D" unique_id=1377057694]
-texture_filter = 1
-offset_left = -562.0
-offset_top = -304.0
-offset_right = -320.0
-offset_bottom = -249.0
-texture = ExtResource("6_x5sg4")
-expand_mode = 3
-script = ExtResource("7_banner")
-
-[node name="Label" type="Label" parent="CharacterBody2D/Camera2D/Banner" unique_id=1874999297]
-texture_filter = 1
-layout_mode = 0
-offset_left = 143.0
-offset_top = 7.0
-offset_right = 230.0
-offset_bottom = 35.0
-text = "0$"
-label_settings = SubResource("LabelSettings_jhl44")
-
-[node name="TimerLabel" type="Label" parent="CharacterBody2D/Camera2D/Banner" unique_id=438969739]
-texture_filter = 1
-layout_mode = 0
-offset_left = 44.0
-offset_top = 7.0
-offset_right = 131.0
-offset_bottom = 35.0
-text = "10:00"
-label_settings = SubResource("LabelSettings_jhl44")
-
 [node name="Underwater_Text" type="TextureRect" parent="CharacterBody2D/Camera2D" unique_id=2135291448]
 visible = false
 texture_filter = 1
@@ -2724,6 +2689,8 @@ offset_top = -218.0
 offset_right = 340.0
 offset_bottom = -18.730042
 texture = ExtResource("2_7ykll")
+
+[node name="Banner2" parent="CharacterBody2D/Camera2D" unique_id=382679914 instance=ExtResource("17_6xfuw")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=640104217]
 

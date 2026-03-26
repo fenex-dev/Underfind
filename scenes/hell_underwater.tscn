@@ -12,9 +12,8 @@
 [ext_resource type="Script" uid="uid://bnhodst1lsw4l" path="res://scripts/adam.gd" id="7_dlrvt"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="8_8cqw2"]
 [ext_resource type="Texture2D" uid="uid://dmuqlisthyhib" path="res://IMGS/ui/All.png" id="8_esnyg"]
-[ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="9_ljmh0"]
-[ext_resource type="Script" uid="uid://dsilfi0q220ec" path="res://scripts/banner.gd" id="10_banner"]
 [ext_resource type="Shader" uid="uid://6vfs4o4qrspc" path="res://shaders/hell.gdshader" id="11_dlrvt"]
+[ext_resource type="PackedScene" uid="uid://bk6meeushd7ey" path="res://state_banner.tscn" id="14_fer80"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="15_e6enc"]
 [ext_resource type="Texture2D" uid="uid://d21auhre8tnae" path="res://IMGS/lava_title.png" id="15_fer80"]
 [ext_resource type="PackedScene" uid="uid://bk8vlqanbro6t" path="res://scenes/oxygen_tank.tscn" id="16_3h0yo"]
@@ -464,10 +463,6 @@ region = Rect2(1059, 37, 42, 7)
 atlas = ExtResource("8_esnyg")
 region = Rect2(1107, 37, 42, 7)
 
-[sub_resource type="LabelSettings" id="LabelSettings_otsws"]
-font_size = 20
-font_color = Color(0, 0, 0, 1)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_uqt7h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_esnyg"]
@@ -557,36 +552,6 @@ limit_top = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="Banner" type="TextureRect" parent="Player/Camera2D" unique_id=439498762]
-texture_filter = 1
-offset_left = -562.0
-offset_top = -304.0
-offset_right = -320.0
-offset_bottom = -249.0
-texture = ExtResource("9_ljmh0")
-expand_mode = 3
-script = ExtResource("10_banner")
-
-[node name="Label" type="Label" parent="Player/Camera2D/Banner" unique_id=1358029298]
-texture_filter = 1
-layout_mode = 0
-offset_left = 143.0
-offset_top = 7.0
-offset_right = 230.0
-offset_bottom = 35.0
-text = "0$"
-label_settings = SubResource("LabelSettings_otsws")
-
-[node name="TimerLabel" type="Label" parent="Player/Camera2D/Banner" unique_id=868427152]
-texture_filter = 1
-layout_mode = 0
-offset_left = 44.0
-offset_top = 7.0
-offset_right = 131.0
-offset_bottom = 35.0
-text = "10:00"
-label_settings = SubResource("LabelSettings_otsws")
-
 [node name="Underwater_Text" type="TextureRect" parent="Player/Camera2D" unique_id=2039603212]
 visible = false
 texture_filter = 1
@@ -595,6 +560,8 @@ offset_top = -134.0
 offset_right = 319.0
 offset_bottom = 65.26996
 texture = ExtResource("15_fer80")
+
+[node name="Banner2" parent="Player/Camera2D" unique_id=382679914 instance=ExtResource("14_fer80")]
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Player" unique_id=1822228458]
 sprite_frames = SubResource("SpriteFrames_uqt7h")
@@ -677,5 +644,11 @@ position = Vector2(2016, 1431)
 
 [node name="Chest7" parent="." unique_id=279367884 instance=ExtResource("25_wdbx7")]
 position = Vector2(-41, 738)
+
+[node name="CharacterBody2D4" parent="." unique_id=863949413 instance=ExtResource("5_1mgc0")]
+position = Vector2(784.99994, 621.99994)
+
+[node name="CharacterBody2D6" parent="." unique_id=1751754173 instance=ExtResource("5_1mgc0")]
+position = Vector2(379.99997, 1733.9999)
 
 [connection signal="body_entered" from="Area2D13" to="Player" method="go_back"]

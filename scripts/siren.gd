@@ -7,7 +7,7 @@ var is_active: bool = false
 @export var sound_attack: PackedScene
 @onready var pose_timer = $PoseSwitchTimer
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if player and is_active:
 		look_at_player()
 
@@ -46,7 +46,7 @@ func _on_timer_timeout() -> void:
 	var direction = to_player.normalized()
 	
 	# ensure the attack doesn't spawn past the player
-	var spawn_distance = min(50, to_player.length() * 0.5)
+	var spawn_distance = min(30, to_player.length()) * 0.5
 	attack.global_position = origin + direction * spawn_distance
 	get_parent().add_child(attack)
 	print("we got somewhere")

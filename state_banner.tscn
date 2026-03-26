@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bk6meeushd7ey"]
+
+[ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="1_w78vj"]
+[ext_resource type="Script" uid="uid://dsilfi0q220ec" path="res://scripts/banner.gd" id="2_a778e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_otsws"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_w78vj"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[node name="Banner" type="TextureRect" unique_id=382679914]
+texture_filter = 1
+offset_left = -562.0
+offset_top = -304.0
+offset_right = -320.0
+offset_bottom = -249.0
+texture = ExtResource("1_w78vj")
+expand_mode = 3
+script = ExtResource("2_a778e")
+
+[node name="Label" type="Label" parent="." unique_id=2120319302]
+texture_filter = 1
+layout_mode = 0
+offset_left = 106.0
+offset_top = 7.0
+offset_right = 136.0
+offset_bottom = 35.0
+text = "0$"
+label_settings = SubResource("LabelSettings_otsws")
+
+[node name="TimerLabel" type="Label" parent="." unique_id=591216878]
+texture_filter = 1
+layout_mode = 0
+offset_left = 44.0
+offset_top = 7.0
+offset_right = 131.0
+offset_bottom = 35.0
+text = "10:00"
+label_settings = SubResource("LabelSettings_otsws")
+
+[node name="Label2" type="Label" parent="." unique_id=330128451]
+visible = false
+layout_mode = 0
+offset_left = 135.0
+offset_top = 7.0
+offset_right = 191.0
+offset_bottom = 35.0
+text = "Boost"
+label_settings = SubResource("LabelSettings_w78vj")

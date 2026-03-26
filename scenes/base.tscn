@@ -11,9 +11,8 @@
 [ext_resource type="Script" uid="uid://bnhodst1lsw4l" path="res://scripts/adam.gd" id="9_dmaw2"]
 [ext_resource type="Texture2D" uid="uid://bcmhr181vs24h" path="res://IMGS/pipe.png" id="12_dmaw2"]
 [ext_resource type="AudioStream" uid="uid://d0qn18na686an" path="res://sounds/bubbles.mp3" id="13_1xxg6"]
-[ext_resource type="Script" uid="uid://dsilfi0q220ec" path="res://scripts/banner.gd" id="14_ot4hf"]
+[ext_resource type="PackedScene" uid="uid://bk6meeushd7ey" path="res://state_banner.tscn" id="14_517kj"]
 [ext_resource type="PackedScene" uid="uid://bvcud62dcxpx2" path="res://scenes/shop.tscn" id="15_ot4hf"]
-[ext_resource type="Texture2D" uid="uid://ddm5pblkn10ls" path="res://IMGS/ui/UI_Flat_Banner02a.png" id="15_vciil"]
 [ext_resource type="AudioStream" uid="uid://dvfgsmhet4trt" path="res://sounds/ytmp3free.cc_beach-vibes-lofihip-hop-mix-lofi-nature-youtubemp3free.org.mp3" id="15_ycryd"]
 
 [sub_resource type="GDScript" id="GDScript_jn13j"]
@@ -76,10 +75,6 @@ shader_parameter/add_bubble = true
 shader_parameter/bubble_scale = 10.0
 shader_parameter/bubble_speed = 0.5
 shader_parameter/pixel_size = 128.0
-
-[sub_resource type="LabelSettings" id="LabelSettings_ot4hf"]
-font_size = 20
-font_color = Color(0, 0, 0, 1)
 
 [node name="Game" type="Node2D" unique_id=2036010790]
 script = SubResource("GDScript_jn13j")
@@ -158,36 +153,6 @@ texture_mode = 1
 [node name="BubbleSFX" type="AudioStreamPlayer2D" parent="." unique_id=379561679]
 stream = ExtResource("13_1xxg6")
 
-[node name="Banner" type="TextureRect" parent="." unique_id=1873500335]
-texture_filter = 1
-offset_left = 13.0
-offset_top = 19.0
-offset_right = 255.0
-offset_bottom = 74.0
-texture = ExtResource("15_vciil")
-expand_mode = 3
-script = ExtResource("14_ot4hf")
-
-[node name="Label" type="Label" parent="Banner" unique_id=698826120]
-texture_filter = 1
-layout_mode = 0
-offset_left = 143.0
-offset_top = 7.0
-offset_right = 230.0
-offset_bottom = 35.0
-text = "0$"
-label_settings = SubResource("LabelSettings_ot4hf")
-
-[node name="TimerLabel" type="Label" parent="Banner" unique_id=681024811]
-texture_filter = 1
-layout_mode = 0
-offset_left = 44.0
-offset_top = 7.0
-offset_right = 131.0
-offset_bottom = 35.0
-text = "10:00"
-label_settings = SubResource("LabelSettings_ot4hf")
-
 [node name="Area2D2" parent="." unique_id=833320345 instance=ExtResource("15_ot4hf")]
 position = Vector2(1067, 359)
 
@@ -202,5 +167,11 @@ vertical_alignment = 1
 
 [node name="Music" type="AudioStreamPlayer2D" parent="." unique_id=118932849]
 stream = ExtResource("15_ycryd")
+
+[node name="Banner" parent="." unique_id=382679914 instance=ExtResource("14_517kj")]
+offset_left = 58.0
+offset_top = 53.0
+offset_right = 300.0
+offset_bottom = 108.0
 
 [connection signal="body_entered" from="Area2D" to="NiggAdam" method="on_enter_water"]

@@ -2,8 +2,13 @@ extends Node
 var pipe_upgrade_cost: int = 500
 var hp_upgrade_cost: int = 500
 var speed_upgrade_cost: int = 500
+signal speed_boost_changed(new_value)
+var has_speed_boost: bool = false:
+	set(value):
+		if has_speed_boost != value:
+			has_speed_boost = value
+			speed_boost_changed.emit(value)
 signal money_changed(new_amount)
-
 var money: int = 0:
 	set(value):
 		if value > money:
@@ -56,6 +61,7 @@ func reset_game():
 	hp_upgrade_cost = 500
 	speed_upgrade_cost = 500
 	game_time = 600.0
+	has_speed_boost = false
 
 func _process(delta: float):
 	if game_time > 0:

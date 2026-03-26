@@ -27,6 +27,7 @@ func _ready():
 		charge_direction = to_player.normalized()
 	else:
 		charge_direction = Vector2.RIGHT # fallback
+	rotation = charge_direction.angle()
 
 	# small safety delay to avoid initial overlapping collision
 	await get_tree().physics_frame

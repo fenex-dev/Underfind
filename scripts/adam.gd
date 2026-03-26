@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+var boost_timer: Timer = null
 # --- EXPORT VARIABLES ---
 @export var speed: float = 400
 var rope_length_org: float = 1050
@@ -25,8 +25,14 @@ var rope_active: bool = false
 var hook_position: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
+# --- INITIALIZATION ---
+	boost_timer = Timer.new()
+	boost_timer.wait_time = 3.0
+	boost_timer.one_shot = true
+	add_child(boost_timer)
+	boost_timer.connect("timeout", Callable(self, "_on_boost_timeout"))
+	boost_timer.start()
 	current_max_hp = Global.max_hp
-	Global.money_changed.connect(change_money)
 	Global.hp_changed.connect(change_hp)
 	Global.max_hp_changed.connect(change_max_hp)
 	Global.rope_length_changed.connect(change_rope_length)
@@ -43,7 +49,6 @@ func _ready() -> void:
 	sprite.play("Idle")
 
 	change_hp(Global.hp)
-	change_money(Global.money)
 
 	if is_underwater:
 		GRAVITY /= 2
@@ -98,13 +103,6 @@ func change_rope_length(new_length: int):
 	rope_length_2 = rope_length_org - 1600
 
 
-func change_money(money):
-	if get_node_or_null("Camera2D"):
-		$Camera2D.get_node("Banner/Label").text = "$" + str(money)
-	else:
-		get_parent().get_node("Banner/Label").text = "$" + str(money)
-
-
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_axis("move_left", "move_right")
 
@@ -118,7 +116,10 @@ func _physics_process(delta: float) -> void:
 			velocity.y += GRAVITY * delta
 		else:
 			velocity.y = 0
-
+	if Input.is_action_pressed("Boost") and is_underwater and Global.has_speed_boost == true:
+		boost_timer.start()
+		Global.has_speed_boost = false
+		speed *=  2
 	if Input.is_key_pressed(Key.KEY_ESCAPE):
 		change_scenes("res://scenes/main_menu.tscn")
 
@@ -252,3 +253,7 @@ func go_next_level(body: Node2D) -> void:
 func go_back(body: Node2D) -> void:
 	if body == self and bubbles_node:
 		change_scenes("res://scenes/mapa_pls.tscn")
+
+func _on_boost_timeout() -> void:
+	speed /= 2
+
