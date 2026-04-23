@@ -7,6 +7,7 @@ var popup
 @onready var shop_items = $CanvasLayer/ItemList
 var is_shopping = false
 var heal_cost: int = 200
+var boost_cost: int = 500
 
 func _ready() -> void:
 	popup = $Label
@@ -97,4 +98,16 @@ func _on_item_list_item_clicked(index: int, at_position: Vector2, mouse_button_i
 			print(Global.speed)
 		else:
 			print("Not enough money!")
+	elif index == 4:
+		if Global.money >= boost_cost:
+			if Global.has_speed_boost:
+				print("Speed boost already active!")
+				return
+			else:
+				Global.money -= boost_cost
+				Global.has_speed_boost = true
+				print("Speed boost activated!")
+		else:
+			print("Not enough money!")
+		
 	

@@ -11,4 +11,3 @@ func _process(_delta: float) -> void:
 	if get_parent():
 		global_position = get_parent().global_position + initial_offset
 		rotation = 0
-	

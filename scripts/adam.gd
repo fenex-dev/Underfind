@@ -30,8 +30,7 @@ func _ready() -> void:
 	boost_timer.wait_time = 3.0
 	boost_timer.one_shot = true
 	add_child(boost_timer)
-	boost_timer.connect("timeout", Callable(self, "_on_boost_timeout"))
-	boost_timer.start()
+	boost_timer.timeout.connect(_on_boost_timeout)
 	current_max_hp = Global.max_hp
 	Global.hp_changed.connect(change_hp)
 	Global.max_hp_changed.connect(change_max_hp)
@@ -116,10 +115,6 @@ func _physics_process(delta: float) -> void:
 			velocity.y += GRAVITY * delta
 		else:
 			velocity.y = 0
-	if Input.is_action_pressed("Boost") and is_underwater and Global.has_speed_boost == true:
-		boost_timer.start()
-		Global.has_speed_boost = false
-		speed *=  2
 	if Input.is_key_pressed(Key.KEY_ESCAPE):
 		change_scenes("res://scenes/main_menu.tscn")
 
@@ -130,6 +125,11 @@ func _physics_process(delta: float) -> void:
 
 	# --- MOVEMENT LOGIC ---
 	if is_underwater:
+		if Input.is_action_pressed("Boost") and Global.has_speed_boost == true:
+			boost_timer.start()
+			Global.has_speed_boost = false
+			Global.speed *=  2
+			print("boost activated")
 		var move_dir = Vector2.ZERO
 		move_dir.x = direction
 		move_dir.y = Input.get_axis("move_up", "move_down")
@@ -148,6 +148,8 @@ func _physics_process(delta: float) -> void:
 			
 		if Input.is_key_pressed(Key.KEY_R):
 			change_scenes("res://scenes/base.tscn")
+			
+			
 	else:
 		# BASE/LAND MOVEMENT
 		if direction != 0:
@@ -240,6 +242,9 @@ func change_scenes(new_scene: String, _after_change: Callable = Callable()):
 	tween.tween_property(mat, "shader_parameter/transition_fill", 0.0, 0.6)
 
 	tween.tween_callback(func():
+		if boost_timer.time_left > 0:
+			boost_timer.stop()
+			Global.speed /= 2
 		bubbles_node.visible = false
 		get_tree().change_scene_to_file(new_scene)
 	)
@@ -255,5 +260,4 @@ func go_back(body: Node2D) -> void:
 		change_scenes("res://scenes/mapa_pls.tscn")
 
 func _on_boost_timeout() -> void:
-	speed /= 2
-
+	Global.speed /= 2

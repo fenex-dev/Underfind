@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://db8a0xthxi382" path="res://IMGS/ui/upgrade/pipe.png" id="4_2fc2m"]
 [ext_resource type="Texture2D" uid="uid://cjv7010qblvgt" path="res://IMGS/title/heal_icon(1).png" id="5_2fc2m"]
 [ext_resource type="Texture2D" uid="uid://b31q32kofriy2" path="res://IMGS/title/speed_icon(1).png" id="6_8r1wq"]
+[ext_resource type="Texture2D" uid="uid://d0285k5iabi3g" path="res://icon.svg" id="7_ajxib"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xfvoa"]
 radius = 245.00204
@@ -57,7 +58,8 @@ grow_vertical = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 theme_override_font_sizes/font_size = 32
-item_count = 4
+scroll_hint_mode = 1
+item_count = 5
 same_column_width = true
 fixed_column_width = 380
 icon_mode = 0
@@ -70,6 +72,8 @@ item_2/text = "HEAL-$200"
 item_2/icon = ExtResource("5_2fc2m")
 item_3/text = "SPEED-$500"
 item_3/icon = ExtResource("6_8r1wq")
+item_4/text = "BOOST-$500"
+item_4/icon = ExtResource("7_ajxib")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
